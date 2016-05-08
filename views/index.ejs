@@ -5,7 +5,94 @@
 	<link rel='stylesheet' href='/stylesheets/style.css'/>
 </head>
 <body>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %></p>
+
+<div>
+	<h1>Bienvenido a <%= title %></h1>
+
+	<p>Este es un servicio API de compra-venta de articulos de segunda mano. Realizado como práctica de curso Node.js de
+		Keepconding.</p>
+	<p>A continuación se muestran todas las operaciones que puedes realizar a través la API. Todas las peticiones se
+		realizan bajo la ruta <code>http://localhost:3000/api/v1</code></p>
+</div>
+<hr>
+
+<div>
+	<h2>Usuarios</h2>
+</div>
+
+<div>
+	<h3>POST /users/login</h3>
+	<p>Identificación de usuario, los parámetros para autenticarse son: <br>
+		<i><b>email</b></i>: Dirección de correo electrónico del usuario.<br>
+		<i><b>password</b></i>: Contraseña del usuario.<br>
+		Estos parámetros deben ir en el body de la petición.</p>
+	<p>Se retornará como respuesta un texto JSON con el token de autenticación, que deberá ser enviado a la API,
+		para realizar otras peticiones. Este token debe insertar en una cabecera <code>x-access-token</code> de la
+		petición que requiera authentificación.</p>
+</div>
+
+<div>
+	<h3>POST /users/register</h3>
+	<p>Registro de usuario, los parámetros para registrarse son: <br>
+		<i><b>name</b></i>: Nombre del usuario.<br>
+		<i><b>email</b></i>: Dirección de correo electrónico del usuario.<br>
+		<i><b>password</b></i>: Contraseña del usuario.<br>
+		Estos parámetros deben ir en el body de la petición.</p>
+	<p>Se retornará como respuesta un texto JSON con el token de autenticación, que deberá ser enviado a la API,
+		para realizar otras peticiones. Este token debe insertar en una cabecera <code>x-access-token</code> de la
+		petición que requiera authentificación.</p>
+</div>
+
+<div>
+	<h3>GET /users/view <span style="color: #880000">[REQUIERE AUTENTIFICACIÓN]</span></h3>
+	<p>Devuelve información del usuario identificado por su token.</p>
+	<p>Se retornará como respuesta un texto JSON con la información del usuario.</p>
+</div>
+
+<div>
+	<h2>Instalaciones</h2>
+</div>
+
+<div>
+	<h3>POST /installations/register <span style="color: coral">[AUTENTIFICACIÓN OPCIONAL]</span></h3>
+	<p>Registro de token de push, los parámetros para el registro son: <br>
+		<i><b>deviceType</b></i>: Tipo de dispositivo (Android o iOS)<br>
+		<i><b>deviceToken</b></i>: Token del dispositivo.<br>
+		Estos parámetros deben ir en el body de la petición.</p>
+	<p>Se retornará como respuesta un texto JSON indicando si fué un exito la operación. Dependiendo de si la operación
+		se realiza especificando Token de un usuario o no, asociará el token de push a dicho usuario o lo almacenará sin
+		asociarlo.</p>
+</div>
+
+<div>
+	<h2>Anuncios</h2>
+</div>
+
+<div>
+	<h3>GET /ads <span style="color: #880000">[REQUIERE AUTENTIFICACIÓN]</span></h3>
+	<p>Devuelve la lista de anuncios en formato JSON.</p>
+	<p>Se pueden filtrar los anuncios utilizando estos parámetros como query:<br>
+		<b><i>name:</i></b>Para buscar por el nombre del anuncio<br>
+		<b><i>price:</i></b>Para buscar por precio, pudiendo usar los siguientes formatos: -15 (menor que 15), 15-
+		(mayor que 15), 50-100 (Entre 50 y 100), 50 (Igual a 50)<br>
+		<b><i>type:</i></b>'sale', para buscar anuncios que se venden, 'wanted', si buscamos anuncios de se buscan.<br>
+		<b><i>tags:</i></b>Para buscar por una determinada etiqueta. (Se puede añadir este parametro multiples veces
+		para buscar por más de un tag)<br>
+		Adicionalmente se puede usar los parametros limit, start y sort para controlar temas de paginación y orden.</p>
+	<h4>Ejemplo: http://localhost:3000/api/v1/ads?price=0-150&sort=name&tag=lifestyle</h4>
+</div>
+
+<div>
+	<h3>GET /ads/tags <span style="color: #880000">[REQUIERE AUTENTIFICACIÓN]</span></h3>
+	<p>Devuelve la lista de todos los tags existentes en formato JSON</p>
+</div>
+
+<div>
+	<h2>Internacionalización</h2>
+	<p>En los headers de cada petición se puede insertar el parámetro <code>x-lang</code>. Si no se utiliza, los
+		mensajes se mostrarán en inglés, si indica <code>x-lang: es</code>, los mensajes se mostrarán en castellano.
+		Si no existe el lenguaje solicitado, se traducirán al inglés.</p>
+</div>
+
 </body>
 </html>

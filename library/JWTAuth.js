@@ -31,7 +31,7 @@ module.exports = function () {
                 if (err) {
                     let error = new Error('FAILED_TO_AUTHENTICATE_TOKEN');
                     error.status = 401;
-                    throw error;
+                    next(error);
                 } else {
                     // if everything is good, save to request for use in other routes
                     req.decoded = decoded;
@@ -44,7 +44,7 @@ module.exports = function () {
             // if there is no token return error
             let error = new Error('NO_TOKEN_PROVIDED');
             error.status = 403;
-            throw error;
+            next(error);
 
         }
     };
