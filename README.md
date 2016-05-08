@@ -7,7 +7,7 @@ Nodepop is a API service for buying and selling items. This is a practice of Nod
 * MongoDB 3.2+ server runing
 * Node 4.x LTS
 
-## How yo use
+## How to use
 
 * Clone this repo and open a terminal inside root directory from this repo.
 * Execute `npm install`.
