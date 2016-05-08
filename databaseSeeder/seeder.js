@@ -72,13 +72,13 @@ Ad.remove({}, (err) => {
 
 Installation.remove({}, (err) => {
     if (err) {
-        return console.log('Error removing Ad object in BD: ', err);
+        return console.log('Error removing Installations object in BD: ', err);
     }
 });
 
 User.remove({}, (err) => {
     if (err) {
-        return console.log('Error removing Ad object in BD: ', err);
+        return console.log('Error removing Users object in BD: ', err);
     }
 });
 
@@ -98,11 +98,11 @@ reader('Ads', (err, data) => {
 // Loading Users in database
 reader('Users', (err, data) => {
     if (err) {
-        return console.log('Reading Ads Error: ', err);
+        return console.log('Reading Users Error: ', err);
     }
     inserter(data, 'Users', (err, item) => {
         if (err) {
-            return console.log('Inserting Ads Error: ', err);
+            return console.log('Inserting Users Error: ', err);
         }
         return console.log('Item saved:', item);
     });
@@ -111,11 +111,11 @@ reader('Users', (err, data) => {
 // Loading Installations in database
 reader('Installations', (err, data) => {
     if (err) {
-        return console.log('Reading Ads Error: ', err);
+        return console.log('Reading Installations Error: ', err);
     }
     inserter(data, 'Installations', (err, item) => {
         if (err) {
-            return console.log('Inserting Ads Error: ', err);
+            return console.log('Inserting Installations Error: ', err);
         }
         return console.log('Item saved:', item);
     });
