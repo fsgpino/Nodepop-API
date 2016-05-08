@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+// Mode strict
+'use strict';
+
 /**
  * Module dependencies.
  */
@@ -7,6 +10,7 @@
 var app = require('../app');
 var debug = require('debug')('nodepop:server');
 var http = require('http');
+var cluster = require('cluster');
 
 /**
  * Get port from environment and store in Express.
@@ -16,18 +20,57 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Working in cluster
  */
 
-var server = http.createServer(app);
+var inCluster = 'yes' === (process.env.CLUSTER || 'yes');
+if (cluster.isMaster && inCluster) {
+    let workers = require('os').cpus().length;
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+    console.log(`Cluster enabled. Starting ${workers} workers.`);
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+    for (let i = 0; i < workers; i++) {
+        cluster.fork();
+    }
+
+    /**
+     * Lintener to start worker
+     */
+
+    cluster.on('online', function (worker) {
+        console.log(`Worker ${worker.process.pid} is running.`);
+    });
+
+} else {
+
+    if (!inCluster) {
+        console.log(`Cluster disabled. Starting 1 worker.`);
+    }
+
+    /**
+     * Lintener to restart worker in end case
+     */
+
+    cluster.on('exit', function (worker, code, signal) {
+        console.log(`Warning: Worker with PID $(worker.process.pid) ended with code: $(code), and signal: $(signal). Restarting worker...`);
+        cluster.fork();
+    });
+
+    /**
+     * Create HTTP server.
+     */
+
+    var server = http.createServer(app);
+
+    /**
+     * Listen on provided port, on all network interfaces.
+     */
+
+    server.listen(port);
+    server.on('error', onError);
+    server.on('listening', onListening);
+
+}
 
 /**
  * Normalize a port into a number, string, or false.

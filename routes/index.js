@@ -1,9 +1,15 @@
-var express = require('express');
-var router = express.Router();
+// Index routes - Index
 
-/* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Express'});
+// Mode strict
+"use strict";
+
+// Libraries required
+let router = require('express').Router();
+
+// Get home page
+router.get('/', function (req, res) {
+    res.render('index', {title: 'Nodepop API'});
 });
 
+// Export router
 module.exports = router;

@@ -4,8 +4,9 @@
   "description": "API service for buying and selling items",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "debug": "node-debug ./bin/www"
+    "start": "nodemon ./bin/www",
+    "debug": "CLUSTER=no DEBUG=generated:* nodemon ./bin/www",
+    "seeder": "nodemon ./databaseSeeder/seeder.js"
   },
   "repository": {
     "type": "git",

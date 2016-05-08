@@ -1,0 +1,11 @@
+{
+  "NOT_FOUND": "Página no encontrada",
+  "FAILED_TO_AUTHENTICATE_TOKEN": "Authentificación de token fallida",
+  "NO_TOKEN_PROVIDED": "Token no proporcionado",
+  "INTERNAL_ERROR": "Error interno en el servidor",
+  "USER_NOT_FOUND": "El correo eléctronico proporcionado no existe",
+  "INVALID_PASSWORD": "La contraseña proporcionada no es correcta",
+  "USER_ALREDY_EXIST": "El correo eléctronico proporcionado ya existe",
+  "VALIDATION_USER_ERROR": "Algunos de los parámetros proporcionados no son correctos. Por favor, revise que la dirección de correo electronico es correcta, así como su nombre",
+  "VALIDATION_INSTALLATION_ERROR": "Algunos de los parámetros proporcionados no son correctos. Por favor, revise que el tipo de dispositivo es Android o iOS y que especifica el token de push de su dispositivo"
+}
